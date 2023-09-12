@@ -1,5 +1,5 @@
 # Chapter 1
-# Rust installation
+## Rust installation
 For installing and managing Rust toolchain we will need rustup.
 for installing rustup you could go to https://www.rust-lang.org/tools/install and select the installation method for your os
 ### Linux
@@ -10,14 +10,14 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 Are you really, really sure to install it on windows?
 You could download and run [rustup-init.exe](https://static.rust-lang.org/rustup/dist/i686-pc-windows-gnu/rustup-init.exe)
 
-## Using rustup
+### Using rustup
 For installing stable rust you could follow the installation guide, or you could run:
 ```bash
 rustup toolchain instal stable
 ```
 Now we have rust installed, it could be neccessary to reload the shell or add the directory to PATH enviroment variable
 
-## First project
+### First project
 For creating a new project we will use cargo to manage all the dependencies and configuration.
 Simply we execute:
  ```bash
