@@ -33,7 +33,6 @@
 
     </head>
     <body>
-    <div id="body-container">
         <!-- Provide site root to javascript -->
         <script>
             var path_to_root = "";
@@ -71,12 +70,10 @@
         <!-- Hide / unhide sidebar before it is displayed -->
         <script>
             var html = document.querySelector('html');
-            var sidebar = null;
+            var sidebar = 'hidden';
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
-            } else {
-                sidebar = 'hidden';
             }
             html.classList.remove('sidebar-visible');
             html.classList.add("sidebar-" + sidebar);
@@ -89,33 +86,11 @@
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
 
-        <!-- Track and set sidebar scroll position -->
-        <script>
-            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
-            sidebarScrollbox.addEventListener('click', function(e) {
-                if (e.target.tagName === 'A') {
-                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
-                }
-            }, { passive: true });
-            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
-            sessionStorage.removeItem('sidebar-scroll');
-            if (sidebarScrollTop) {
-                // preserve sidebar scroll position when navigating via links within sidebar
-                sidebarScrollbox.scrollTop = sidebarScrollTop;
-            } else {
-                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
-                var activeSection = document.querySelector('#sidebar .active');
-                if (activeSection) {
-                    activeSection.scrollIntoView({ block: 'center' });
-                }
-            }
-        </script>
-
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
                                 <div id="menu-bar-hover-placeholder"></div>
-                <div id="menu-bar" class="menu-bar sticky">
+                <div id="menu-bar" class="menu-bar sticky bordered">
                     <div class="left-buttons">
                         <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
                             <i class="fa fa-bars"></i>
@@ -167,16 +142,18 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="chapter-1"><a class="header" href="#chapter-1">Chapter 1</a></h1>
+                        <h1 id="installation"><a class="header" href="#installation">Installation</a></h1>
 <h2 id="rust-installation"><a class="header" href="#rust-installation">Rust installation</a></h2>
 <p>For installing and managing Rust toolchain we will need rustup.
-for installing rustup you could go to https://www.rust-lang.org/tools/install and select the installation method for your os</p>
-<h3 id="linux"><a class="header" href="#linux">Linux</a></h3>
+for installing rustup you could go to <a href="https://www.rust-lang.org/tools/install">this link</a> and select the installation method for your os</p>
+<h3 id="linux--macos"><a class="header" href="#linux--macos">Linux / MacOS</a></h3>
+<p>Execute this command on the terminal</p>
 <pre><code class="language-bash">curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 </code></pre>
 <h3 id="windows"><a class="header" href="#windows">Windows</a></h3>
 <p>Are you really, really sure to install it on windows?
-You could download and run <a href="https://static.rust-lang.org/rustup/dist/i686-pc-windows-gnu/rustup-init.exe">rustup-init.exe</a></p>
+You could download and run <a href="https://static.rust-lang.org/rustup/dist/i686-pc-windows-gnu/rustup-init.exe">rustup-init.exe</a>
+Once executed, select <code>1) Quick Install</code></p>
 <h3 id="using-rustup"><a class="header" href="#using-rustup">Using rustup</a></h3>
 <p>For installing stable rust you could follow the installation guide, or you could run:</p>
 <pre><code class="language-bash">rustup toolchain instal stable
@@ -207,12 +184,12 @@ Simply we execute:</p>
 <p>If you are going to use an IDE in order to program in Rust, you'll have different options for code highlightings, language server, and so on</p>
 <ul>
 <li>
-<p>VS Code<br />
-You can follow the <a href="https://code.visualstudio.com/docs/languages/rust#_2-install-the-rustanalyzer-extension">official guide</a> to install the rust-analyzer extension and work with the IDE from Redmond</p>
+<p>[NEW] RustRover<br />
+You can install it at <a href="https://www.jetbrains.com/rust/">this page</a></p>
 </li>
 <li>
-<p>Intellij/ Clion<br />
-You can install this <a href="https://www.jetbrains.com/rust/">plugin</a>.</p>
+<p>VS Code<br />
+You can follow the <a href="https://code.visualstudio.com/docs/languages/rust#_2-install-the-rustanalyzer-extension">official guide</a> to install the rust-analyzer extension and work with the IDE from Redmond</p>
 </li>
 <li>
 <p>Nvim<br />
@@ -277,6 +254,5 @@ Good luck (it's also the best and most lightweight option) ;)</p>
         });
         </script>
 
-    </div>
     </body>
 </html>

@@ -4,14 +4,12 @@
 window.onunload = function () { };
 
 // Global variable, shared between modules
-function playground_text(playground, hidden = true) {
+function playground_text(playground) {
     let code_block = playground.querySelector("code");
 
     if (window.ace && code_block.classList.contains("editable")) {
         let editor = window.ace.edit(code_block);
         return editor.getValue();
-    } else if (hidden) {
-        return code_block.textContent;
     } else {
         return code_block.innerText;
     }
@@ -68,7 +66,7 @@ function playground_text(playground, hidden = true) {
     }
 
     // updates the visibility of play button based on `no_run` class and
-    // used crates vs ones available on https://play.rust-lang.org
+    // used crates vs ones available on http://play.rust-lang.org
     function update_play_button(pre_block, playground_crates) {
         var play_button = pre_block.querySelector(".play-button");
 
@@ -168,6 +166,7 @@ function playground_text(playground, hidden = true) {
             .filter(function (node) {return node.classList.contains("editable"); })
             .forEach(function (block) { block.classList.remove('language-rust'); });
 
+        Array
         code_nodes
             .filter(function (node) {return !node.classList.contains("editable"); })
             .forEach(function (block) { hljs.highlightBlock(block); });
@@ -179,7 +178,7 @@ function playground_text(playground, hidden = true) {
     // even if highlighting doesn't apply
     code_nodes.forEach(function (block) { block.classList.add('hljs'); });
 
-    Array.from(document.querySelectorAll("code.hljs")).forEach(function (block) {
+    Array.from(document.querySelectorAll("code.language-rust")).forEach(function (block) {
 
         var lines = Array.from(block.querySelectorAll('.boring'));
         // If no lines were hidden, return
@@ -346,7 +345,7 @@ function playground_text(playground, hidden = true) {
         }
 
         setTimeout(function () {
-            themeColorMetaTag.content = getComputedStyle(document.documentElement).backgroundColor;
+            themeColorMetaTag.content = getComputedStyle(document.body).backgroundColor;
         }, 1);
 
         if (window.ace && window.editors) {
@@ -551,6 +550,13 @@ function playground_text(playground, hidden = true) {
             firstContact = null;
         }
     }, { passive: true });
+
+    // Scroll sidebar to current active section
+    var activeSection = document.getElementById("sidebar").querySelector(".active");
+    if (activeSection) {
+        // https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoView
+        activeSection.scrollIntoView({ block: 'center' });
+    }
 })();
 
 (function chapterNavigation() {
@@ -594,7 +600,7 @@ function playground_text(playground, hidden = true) {
         text: function (trigger) {
             hideTooltip(trigger);
             let playground = trigger.closest("pre");
-            return playground_text(playground, false);
+            return playground_text(playground);
         }
     });
 
@@ -669,14 +675,13 @@ function playground_text(playground, hidden = true) {
         }, { passive: true });
     })();
     (function controllBorder() {
-        function updateBorder() {
+        menu.classList.remove('bordered');
+        document.addEventListener('scroll', function () {
             if (menu.offsetTop === 0) {
                 menu.classList.remove('bordered');
             } else {
                 menu.classList.add('bordered');
             }
-        }
-        updateBorder();
-        document.addEventListener('scroll', updateBorder, { passive: true });
+        }, { passive: true });
     })();
 })();

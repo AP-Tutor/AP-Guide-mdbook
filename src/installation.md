@@ -1,14 +1,18 @@
-# Chapter 1
+# Installation
 ## Rust installation
 For installing and managing Rust toolchain we will need rustup.
-for installing rustup you could go to https://www.rust-lang.org/tools/install and select the installation method for your os
-### Linux
+for installing rustup you could go to [this link](https://www.rust-lang.org/tools/install) and select the installation method for your os
+### Linux / MacOS
+Execute this command on the terminal
+
 ```bash
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 ```
 ### Windows
 Are you really, really sure to install it on windows?
 You could download and run [rustup-init.exe](https://static.rust-lang.org/rustup/dist/i686-pc-windows-gnu/rustup-init.exe)
+Once executed, select `1) Quick Install`
+
 
 ### Using rustup
 For installing stable rust you could follow the installation guide, or you could run:
@@ -45,12 +49,11 @@ For more information, you could read from the excellent [rust book](https://doc.
 
 If you are going to use an IDE in order to program in Rust, you'll have different options for code highlightings, language server, and so on
 
+- [NEW] RustRover  
+    You can install it at [this page](https://www.jetbrains.com/rust/)
+
 - VS Code  
     You can follow the [official guide](https://code.visualstudio.com/docs/languages/rust#_2-install-the-rustanalyzer-extension) to install the rust-analyzer extension and work with the IDE from Redmond   
-
-
-- Intellij/ Clion   
-    You can install this [plugin](https://www.jetbrains.com/rust/).  
 
 
 - Nvim  
